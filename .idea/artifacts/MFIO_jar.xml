@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="MFIO:jar">
+    <output-path>$USER_HOME$/Desktop/Новая папка (2)/plugins</output-path>
+    <root id="archive" name="MFIO.jar">
+      <element id="module-output" name="MFIO" />
+    </root>
+  </artifact>
+</component>
