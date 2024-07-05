@@ -22,7 +22,7 @@ public class MFIOCommand implements CommandExecutor, TabCompleter {
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
 
 
-        if(strings.length > 1 && sender instanceof Player player) {
+        if(strings.length >= 1 && sender instanceof Player player) {
             String arg = strings[0].toLowerCase();
             if(arg.equals("да") || arg.equals("нет")) {
                 MFIO.getListener().processAction(player, arg);
