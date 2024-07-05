@@ -5,6 +5,25 @@ options:
   min_length: 3
   max_length: 16
 
+sex:
+  empty:
+    # Плэйсхолдер для игрока который находится в процессе регистрации
+    placeholder: ""
+  male:
+    # Плэйсхолдер для игрока который выбрал мужской пол
+    placeholder: ""
+    # Текст который используется в виде ответа на выбор мужского пола
+    choose-answer: "муж"
+    confirm-text: "Мужской"
+    command_on_confirm: "lp user %player% parent add male"
+  female:
+    # Плэйсхолдер для игрока который выбрал женский пол
+    placeholder: ""
+    # Текст который используется в виде ответа на выбор женского пола
+    choose-answer: "жен"
+    confirm-text: "Женский"
+    command_on_confirm: "lp user %player% parent add male"
+
 messages:
 
   # Config reloaded
@@ -14,17 +33,26 @@ messages:
   unknown_argument: "<#ff0051>[❌] Неизвестный аргумент."
   player_not_found: "<#ff0051>[❌] Игрок <white>[%PLAYER%] не найден."
   invalid_symbols: "<#ff0051>[❌] Недопустимые символы в имени."
-  confirm_registration: "<white>Вы выбрали: <#78beff><bold>%TEMP_FIO%</bold><white>, вы уверены?<newline>Напишите <#78ff9e>[Да] <white>или <#ff0051>[Нет]<white>."
+  invalid_sex: "<#ff0051>[❌] Неизвестный пол"
+
+  confirm_name: "<white>Вы выбрали: <#78beff><bold>%TEMP_FIO%</bold><white>, вы уверены?<newline>Напишите <#78ff9e>[Да] <white>или <#ff0051>[Нет]<white>."
+  confirm_sex: "<white>Вы выбрали: <#78beff><bold>%TEMP_SEX%</bold><white> пол, вы уверены?<newline>Напишите <#78ff9e>[Да] <white>или <#ff0051>[Нет]<white>."
+
   cancel_choose: "<#ff0051>[❌] Вы отменили выбор имени, выберите новое."
   successful_fio_change: "<#78ff9e>[✔] Фамилия и имя игрока изменены."
   too_short: "<#ff0051>[❌] Слишком короткое имя или фамилия."
   too_long: "<#ff0051>[❌] Слишком длинное имя или фамилия."
+  already_registered: "<#ff0051>[❌] Такое имя уже зарегистрировано."
 
 
   # Registration title and subtitle
-  register:
-    title: "<#ff0051>[⌚] Укажите имя и фамилию"
-    subtitle: "<white>иᴍя ȹᴀмилия"
+  register_name:
+    title: "<#ff0051>[⌚] Укажите имя и фамилию персонажа"
+    subtitle: "<white>%first% %full%"
+
+  register_sex:
+    title: "<#ff0051>[⌚] Укажите пол персонажа"
+    subtitle: "<white>мʏж <color:dark_gray>/</color> жᴇн"
 
   # Login title and subtitle
   registered:

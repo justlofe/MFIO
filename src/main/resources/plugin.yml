@@ -2,7 +2,7 @@ name: MFIO
 version: '${project.version}'
 main: pr.lofe.crp.mfio.MFIO
 api-version: '1.20'
-description: 'Private plugin for Character RolePlay'
+description: 'Private plugin that provides a registration with choosing a first name, full name and sex'
 author: 'just_l0fe'
 website: 'https://t.me/just_lofe'
 permissions:

@@ -1,6 +1,5 @@
 package pr.lofe.crp.mfio.commands;
 
-import com.google.common.collect.Lists;
 import net.kyori.adventure.text.minimessage.MiniMessage;
 import org.bukkit.Sound;
 import org.bukkit.command.Command;
@@ -14,39 +13,45 @@ import pr.lofe.crp.mfio.MFIO;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 public class MFIOCommand implements CommandExecutor, TabCompleter {
 
     MiniMessage mm = MiniMessage.miniMessage();
 
     @Override
-    public boolean onCommand(@NotNull CommandSender commandSender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
+    public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String s, @NotNull String[] strings) {
 
-        if(commandSender.hasPermission("mfio.admin")) {
+
+        if(strings.length > 1 && sender instanceof Player player) {
+            String arg = strings[0].toLowerCase();
+            if(arg.equals("да") || arg.equals("нет")) {
+                MFIO.getListener().processAction(player, arg);
+            }
+        }
+
+        if(sender.hasPermission("mfio.admin")) {
 
             if(strings.length == 0) {
                 String message = MFIO.getInstance().getConfig().getString("messages.few_arguments");
-                if(message != null && !message.equals(""))
-                    commandSender.sendMessage(mm.deserialize(message));
+                if(message != null && !message.isEmpty())
+                    sender.sendMessage(mm.deserialize(message));
             }
             else if(strings[0].equalsIgnoreCase("reload")) {
                 String message = MFIO.getInstance().getConfig().getString("messages.reloaded");
-                if(message != null && !message.equals(""))
-                    commandSender.sendMessage(mm.deserialize(message));
+                if(message != null && !message.isEmpty())
+                    sender.sendMessage(mm.deserialize(message));
 
                 MFIO.getInstance().reloadConfig();
 
-                if(commandSender instanceof Player) {
-                    Player player = (Player) commandSender;
+                if(sender instanceof Player player) {
                     player.playSound(player.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 100, 2);
                 }
             }
             else {
 
                 String message = MFIO.getInstance().getConfig().getString("messages.unknown_argument");
-                if(message != null && !message.equals(""))
-                    commandSender.sendMessage(mm.deserialize(message));
+                if(message != null && !message.isEmpty())
+                    sender.sendMessage(mm.deserialize(message));
 
             }
 
@@ -54,8 +59,8 @@ public class MFIOCommand implements CommandExecutor, TabCompleter {
         else {
 
             String message = MFIO.getInstance().getConfig().getString("messages.no_permissions");
-            if(message != null && !message.equals(""))
-                commandSender.sendMessage(mm.deserialize(message));
+            if(message != null && !message.isEmpty())
+                sender.sendMessage(mm.deserialize(message));
 
         }
 

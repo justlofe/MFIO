@@ -31,24 +31,34 @@ public class MFIOExpansion extends PlaceholderExpansion {
 
     @Override
     public @Nullable String onRequest(OfflinePlayer player, @NotNull String params) {
-        String raw = MFIO.getData().getString(player.getUniqueId().toString());
-        String[] rawArgs = raw.split(" ");
+        String fioRaw = MFIO.getData().getString(player.getUniqueId() + ".name", "Имя Фамилия");
+        String[] rawArgs = fioRaw.split(" ");
         String name = "", surname = "";
         if(rawArgs.length == 2) {
             name = rawArgs[0];
             surname = rawArgs[1];
         }
 
-        if(params.equalsIgnoreCase("fio"))
-            return name + " " + surname;
-        else if (params.equalsIgnoreCase("surnamefio")) {
-            if(!surname.equals(""))
-                return name + " " + surname.charAt(0);
+        switch (params.toLowerCase()) {
+            case "fio" -> {
+                return fioRaw;
+            }
+            case "surnamefio" -> {
+                return surname.isEmpty() ? "Имя Ф" : name + " " + surname.charAt(0);
+            }
+            case "surname" -> {
+                return surname;
+            }
+            case "name" -> {
+                return name;
+            }
+            case "sex" -> {
+                String sex = MFIO.getData().getString(player.getUniqueId() + ".sex", "");
+                return MFIO.getInstance().getConfig().getString("sex." + sex.toLowerCase() + ".placeholder", MFIO.getInstance().getConfig().getString("sex.empty.placeholder", ""));
+            }
+            default -> {
+                return "";
+            }
         }
-        else if (params.equalsIgnoreCase("surname"))
-            return surname;
-        else if (params.equalsIgnoreCase("name"))
-            return name;
-        return null;
     }
 }

@@ -10,6 +10,7 @@ public final class MFIO extends JavaPlugin {
 
     private static MFIO instance;
     private Config data;
+    private MFIOListener listener;
 
     @Override
     public void onEnable() {
@@ -29,7 +30,8 @@ public final class MFIO extends JavaPlugin {
         getCommand("changefio").setExecutor(new ChangeFIOCommand());
         getCommand("changefio").setTabCompleter(new ChangeFIOCommand());
 
-        Bukkit.getPluginManager().registerEvents(new MFIOListener(), this);
+        listener = new MFIOListener();
+        Bukkit.getPluginManager().registerEvents(listener, this);
     }
 
     @Override
@@ -48,4 +50,5 @@ public final class MFIO extends JavaPlugin {
     public static MFIO getInstance() {
         return instance;
     }
+    public static MFIOListener getListener() { return instance.listener; }
 }
